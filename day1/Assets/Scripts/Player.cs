@@ -12,16 +12,19 @@ public class Player : MonoBehaviour
     public bool isPlayerOnGround = true;
 
     public LayerMask ground;
-    
+    public Collider2D coll;
+    public Collider2D head;
+
     private Rigidbody2D rb;
     private Animator anim;
-    private CircleCollider2D coll;
 
     private bool jumping;
     private bool falling;
     private bool idle;
     private bool crouch;
 
+    private bool isHurt;
+    
     private float speed;
 
     
@@ -30,7 +33,6 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        coll = GetComponent<CircleCollider2D>();
 
         speed = initSpeed;
     }
@@ -38,7 +40,14 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Movement();
+        if (isHurt)
+        {
+            StartCoroutine(HurtRecover());
+        }
+        else
+        {
+            Movement();
+        }
         
         PlayAnimator();
     }
@@ -73,6 +82,9 @@ public class Player : MonoBehaviour
             crouch = false;
             speed = initSpeed;
         }
+
+        // 蹲下，低头
+        head.enabled = ! crouch;
         
         // range: [-1, 1]
         var hv = Input.GetAxis("Horizontal");
@@ -86,10 +98,7 @@ public class Player : MonoBehaviour
         {
             if (isPlayerOnGround)
             {
-                isPlayerOnGround = false;
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                jumping = true;
-                falling = false;
+                Jump(jumpForce);
             }
         }
 
@@ -100,12 +109,60 @@ public class Player : MonoBehaviour
         }
     }
 
+    void Jump(float force)
+    {
+        isPlayerOnGround = false;
+        rb.velocity = new Vector2(rb.velocity.x, force);
+        jumping = true;
+        falling = false;
+    }
+
+    void Flick(GameObject go, float force)
+    {
+        if (transform.position.x < go.transform.position.x)
+        {
+            isHurt = true;
+            rb.velocity = Vector2.left * force;
+        }
+        else if (transform.position.x > go.transform.position.x) 
+        {
+            isHurt = true;
+
+            rb.velocity = Vector2.right * force;
+        }
+    }
+
     void PlayAnimator()
     {
         anim.SetFloat("running", Math.Abs(rb.velocity.x));
         anim.SetBool("jumping", jumping);
         anim.SetBool("falling", falling);
         anim.SetBool("crouch", crouch);
+        anim.SetBool("hurt", isHurt);
     }
 
+    IEnumerator HurtRecover(float recoverTime = 0.3f)
+    {
+        yield return new WaitForSeconds(recoverTime);
+        isHurt = false;
+    }
+    
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        // 碰到敌人
+        if (other.gameObject.CompareTag("enemy"))
+        {
+            // 踩到敌人
+            if (falling)
+            {
+                Jump(8);
+                Destroy(other.gameObject);
+            }
+            else
+            {
+                Flick(other.gameObject, 5);
+                Jump(5);
+            }
+        }
+    }
 }
