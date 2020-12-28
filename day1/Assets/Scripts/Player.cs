@@ -156,7 +156,9 @@ public class Player : MonoBehaviour
             if (falling)
             {
                 Jump(8);
-                Destroy(other.gameObject);
+
+                Enemy enemy = other.gameObject.GetComponent<Enemy>();
+                enemy.Death();
             }
             else
             {

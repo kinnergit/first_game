@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -57,7 +58,6 @@ public class EnemyFrog : MonoBehaviour
             jumpTime = 0;
         }
     }
-
     void Movement()
     {
         if (coll.IsTouchingLayers(ground))
@@ -74,21 +74,7 @@ public class EnemyFrog : MonoBehaviour
             falling = false;
         }
 
-        if (faceDir)
-        {
-            if (transform.position.x < minBound)
-            {
-                faceDir = false;
-            }
-        }
-        else
-        {
-            if (transform.position.x > maxBound)
-            {
-                faceDir = true;
-            }
-
-        }
+        FaceCheck();
         
         if (rb.velocity.y < 0)
         {
@@ -103,22 +89,11 @@ public class EnemyFrog : MonoBehaviour
         {
             transform.localScale = new Vector3(1, 1, 1);
             rb.velocity = new Vector2(-speed, force);
-            
-            if (transform.position.x < minBound)
-            {
-                faceDir = false;
-            }
         }
         else
         {
             transform.localScale = new Vector3(-1, 1, 1);
             rb.velocity = new Vector2(speed, force);
-            
-            if (transform.position.x > maxBound)
-            {
-                faceDir = true;
-            }
-
         }
         
         jumping = true;
@@ -130,4 +105,24 @@ public class EnemyFrog : MonoBehaviour
         anim.SetBool("jumping", jumping);
         anim.SetBool("falling", falling);
     }
+
+    void FaceCheck()
+    {
+        if (faceDir)
+        {
+            if (transform.position.x < minBound)
+            {
+                faceDir = false;
+            }
+        }
+        else
+        {
+            if (transform.position.x > maxBound)
+            {
+                faceDir = true;
+            }
+
+        }
+    }
+
 }
