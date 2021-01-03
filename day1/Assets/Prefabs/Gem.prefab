@@ -143,5 +143,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coll: {fileID: 2306685694202617271}
-  cherryNum: {fileID: 0}
-  gemNum: {fileID: 0}

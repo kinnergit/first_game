@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1395
     height: 855
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Hierarchy
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_MinSize: {x: 781, y: 613}
   m_MaxSize: {x: 16006, y: 18063}
   vertical: 0
-  controlID: 40618
+  controlID: 12042
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_MinSize: {x: 505, y: 613}
   m_MaxSize: {x: 12005, y: 18063}
   vertical: 1
-  controlID: 40619
+  controlID: 12043
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_MinSize: {x: 505, y: 221}
   m_MaxSize: {x: 12005, y: 4021}
   vertical: 0
-  controlID: 40620
+  controlID: 12044
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -450,24 +450,24 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 128}
-      m_SelectedIDs: 2a71ffff
-      m_LastClickedID: -36566
-      m_ExpandedIDs: 2a71ffff5af5ffff40fbffff605d00006a5d0000a05d0000
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: 22f0ffff
+      m_LastClickedID: -4062
+      m_ExpandedIDs: 16a9ffffa0b5ffffb0f0ffff40fbfffff4ffffffd640000044410000b85e0000b6bd0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: Player
+        m_OriginalName: Player
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 58698
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 8}
       m_SearchString: 
@@ -544,9 +544,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 14.021803, y: -4.922659, z: -0.9686323}
+    m_Target: {x: -6.646116, y: -1.1343304, z: -0.59220535}
     speed: 2
-    m_Value: {x: 14.021803, y: -4.922659, z: -0.9686323}
+    m_Value: {x: -6.646116, y: -1.1343304, z: -0.59220535}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -597,9 +597,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 15.843227
+    m_Target: 8.380615
     speed: 2
-    m_Value: 15.843227
+    m_Value: 8.380615
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -657,6 +657,7 @@ MonoBehaviour:
     - {fileID: 7560832520659848514, guid: 7eb69640462a9471c99de22dc47efacc, type: 2}
     - {fileID: 2712174855854526960, guid: bbc87486901ce42a882fa4d7a1b0cc67, type: 2}
     - {fileID: -4374065092487255856, guid: 07ff197552bca4884831326f17e1fb69, type: 2}
+    - {fileID: 6845985774883501285, guid: aadd28d7ac363439ea66f06d269a908d, type: 2}
     m_ValueSerializationHelper:
     - e00: 0.23963414
       e01: 0
@@ -665,7 +666,7 @@ MonoBehaviour:
       e10: 0
       e11: 0.23963414
       e12: 0
-      e13: 137.82013
+      e13: 139.1381
       e20: 0
       e21: 0
       e22: 1
@@ -674,14 +675,14 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-    - e00: 0.20684211
+    - e00: 0.37406158
       e01: 0
       e02: 0
-      e03: 4.6578903
+      e03: -63.59047
       e10: 0
-      e11: 0.20684211
+      e11: 0.37406158
       e12: 0
-      e13: 133.41843
+      e13: 147.50034
       e20: 0
       e21: 0
       e22: 1
@@ -690,14 +691,14 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-    - e00: 0.20684211
+    - e00: 0.21593407
       e01: 0
       e02: 0
-      e03: 4.6578903
+      e03: 4.2033234
       e10: 0
-      e11: 0.20684211
+      e11: 0.21593407
       e12: 0
-      e13: 133.41843
+      e13: 134.91292
       e20: 0
       e21: 0
       e22: 1
@@ -754,10 +755,26 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
+    - e00: 0.20684211
+      e01: 0
+      e02: 0
+      e03: 4.6578903
+      e10: 0
+      e11: 0.20684211
+      e12: 0
+      e13: 133.41843
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 485b39108b0fa47908ca7738fd158f89, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: 0aca5c775e9df489da92dbc81f715bb5, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: -6765235313111029226, guid: 485b39108b0fa47908ca7738fd158f89, type: 2}
+  - m_Target: {fileID: 1022254856827101138, guid: 0aca5c775e9df489da92dbc81f715bb5, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -797,7 +814,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -36566
+  m_LastSelectedObjectID: -4094
 --- !u!114 &20
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -836,22 +853,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Animations/EnterDialog
+    - Assets/Sunnyland/artwork/Sprites/Fx/item-feedback
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 78
   m_LastFolders:
-  - Assets/Animations/EnterDialog
+  - Assets/Sunnyland/artwork/Sprites/Fx/item-feedback
   m_LastFoldersGridSize: 78
   m_LastProjectPath: /Users/longnie/Documents/workspaces/unity/first_game/day1
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 78}
-    m_SelectedIDs: cefb0000
-    m_LastClickedID: 64462
-    m_ExpandedIDs: 00000000564500005a4500005c4500005e45000060450000624500006445000066450000684500005c5600005e56000000ca9a3b
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 7c560000
+    m_LastClickedID: 22140
+    m_ExpandedIDs: 000000008e45000090450000924500009445000096450000984500009a4500009e450000a0450000a2450000ba45000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -879,7 +896,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000564500005a4500005c4500005e45000060450000624500006445000066450000684500005c5600005e56000000ca9a3b
+    m_ExpandedIDs: 000000008e45000090450000924500009445000096450000984500009a4500009c4500009e450000a0450000a245000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

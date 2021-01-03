@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public bool isPlayerOnGround = true;
 
     public GameObject celling;
+    public GameObject flooring;
 
     public AudioSource jumpAudio, hurtAudio, collectAudio;
     
@@ -164,7 +165,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("enemy"))
         {
             // 踩到敌人
-            if (falling)
+            if (falling && Physics2D.OverlapCircle(flooring.transform.position, 0.03f))
             {
                 Jump(8);
 

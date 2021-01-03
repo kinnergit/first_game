@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -10,8 +8,9 @@ public class Enemy : MonoBehaviour
 
     public void Death()
     {
-        audioSource.Play();
         anim.SetTrigger("death");
+        audioSource.Play();
+        
         GetComponent<Collider2D>().enabled = false;
         Destroy(gameObject, 0.2f);
     }
@@ -20,11 +19,5 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
