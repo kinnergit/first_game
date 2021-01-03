@@ -1,7 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
+using Management;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class Player : MonoBehaviour
     public float jumpForce = 12;
     public bool isPlayerOnGround = true;
 
+    public GameObject celling;
+
+    public AudioSource jumpAudio, hurtAudio, collectAudio;
+    
     public LayerMask ground;
     public Collider2D coll;
     public Collider2D head;
@@ -20,7 +25,6 @@ public class Player : MonoBehaviour
 
     private bool jumping;
     private bool falling;
-    private bool idle;
     private bool crouch;
 
     private bool isHurt;
@@ -72,7 +76,7 @@ public class Player : MonoBehaviour
         }
         
         var vv = Input.GetAxisRaw("Vertical");
-        if (vv < 0)
+        if (vv < 0 || Physics2D.OverlapCircle(celling.transform.position, 0.2f, ground))
         {
             crouch = true;
             speed = crouchSpeed;
@@ -94,11 +98,11 @@ public class Player : MonoBehaviour
         }
 
         // Press the jump Key code
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButton("Jump"))
         {
             if (isPlayerOnGround)
             {
-                Jump(jumpForce);
+                Jump(jumpForce, false);
             }
         }
 
@@ -109,8 +113,13 @@ public class Player : MonoBehaviour
         }
     }
 
-    void Jump(float force)
+    void Jump(float force, bool small = true)
     {
+        if ( ! small)
+        {
+            jumpAudio.Play();
+        }
+        
         isPlayerOnGround = false;
         rb.velocity = new Vector2(rb.velocity.x, force);
         jumping = true;
@@ -119,6 +128,8 @@ public class Player : MonoBehaviour
 
     void Flick(GameObject go, float force)
     {
+        hurtAudio.Play();
+        
         if (transform.position.x < go.transform.position.x)
         {
             isHurt = true;
@@ -167,4 +178,23 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("cherry") || other.gameObject.CompareTag("gem"))
+        {
+            collectAudio.Play();
+        } else if (other.gameObject.CompareTag("DeadLine"))
+        {
+            GetComponent<AudioSource>().Stop();
+            Invoke("RestartGame", 2f);
+        }
+    }
+
+    void RestartGame()
+    {
+        GameManager.GetInstance().ClearCollectionNums();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    
 }

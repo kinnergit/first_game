@@ -1,48 +1,50 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using Management;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Collection : MonoBehaviour
 {
 
     public Collider2D coll;
-    public Text cherryNum;
-    public Text gemNum;
 
-    private static int cherryCollectionNum;
-    private static int gemCollectionNum;
+    private GameManager gm;
+
+    private bool isCherryCollected;
+    private bool isGemCollected;
     
     // Start is called before the first frame update
     void Start()
     {
         coll = GetComponent<Collider2D>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        gm = GameManager.GetInstance();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
+            GetComponent<Collider2D>().enabled = false;
+
             if (gameObject.CompareTag("cherry"))
             {
-                cherryCollectionNum++;
-                cherryNum.text = cherryCollectionNum.ToString();
-            }
-            
-            if (gameObject.CompareTag("gem"))
+                isCherryCollected = true;
+            } else if (gameObject.CompareTag("gem"))
             {
-                gemCollectionNum++;
-                gemNum.text = gemCollectionNum.ToString();
+                isGemCollected = true;
             }
 
             Destroy(gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (isCherryCollected)
+        {
+            gm.IncrCherryNum();
+        } else if (isGemCollected)
+        {
+            gm.IncrGemNum();
         }
     }
 }
