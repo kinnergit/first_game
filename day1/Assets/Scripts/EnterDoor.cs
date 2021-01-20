@@ -7,7 +7,13 @@ public class EnterDoor : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            GoNextLevel();
         }
+    }
+
+    public void GoNextLevel()
+    {
+        gameObject.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
 }

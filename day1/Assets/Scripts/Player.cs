@@ -18,9 +18,8 @@ public class Player : MonoBehaviour
     public AudioSource jumpAudio, hurtAudio, collectAudio;
     
     public LayerMask ground;
-    public Collider2D coll;
     public Collider2D head;
-
+    
     private Rigidbody2D rb;
     private Animator anim;
 
@@ -32,19 +31,37 @@ public class Player : MonoBehaviour
     
     private float speed;
 
-    
+    private Joystick joystick;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-
+        
         speed = initSpeed;
+        
+        InitJoy();
     }
 
+    void InitJoy()
+    {
+        joystick = CanvasManager.GetInstance().joystick;
+    }
+    
     // Update is called once per frame
     void Update()
     {
+        if (Physics2D.OverlapCircle(flooring.transform.position, 0.01f, ground))
+        {
+            isPlayerOnGround = true;
+            falling = false;
+        }
+        else
+        {
+            isPlayerOnGround = false;
+        }
+        
         if (isHurt)
         {
             StartCoroutine(HurtRecover());
@@ -59,25 +76,22 @@ public class Player : MonoBehaviour
 
     void Movement()
     {
-        if (coll.IsTouchingLayers(ground))
-        {
-            falling = false;
-            isPlayerOnGround = true;
-        }
-        else
-        {
-            isPlayerOnGround = false;
-        }
-        
         // enum: -1, 0, 1
-        var faceDir = Input.GetAxisRaw("Horizontal");
+        // var faceDir = Input.GetAxisRaw("Horizontal");
+        var faceDir = joystick.Horizontal == 0 ? 0 : Mathf.Sign(joystick.Horizontal);
         if (faceDir != 0)
         {
             transform.localScale = new Vector3(faceDir, 1, 1);
         }
         
-        var vv = Input.GetAxisRaw("Vertical");
-        if (vv < 0 || Physics2D.OverlapCircle(celling.transform.position, 0.2f, ground))
+        // var vv = Input.GetAxisRaw("Vertical");
+        var vv = joystick.Vertical;
+        if (vv < -0.3f)
+        {
+            crouch = true;
+            speed = crouchSpeed;
+        }
+        else if (crouch && Physics2D.OverlapCircle(celling.transform.position, 0.1f, ground))
         {
             crouch = true;
             speed = crouchSpeed;
@@ -92,14 +106,16 @@ public class Player : MonoBehaviour
         head.enabled = ! crouch;
         
         // range: [-1, 1]
-        var hv = Input.GetAxis("Horizontal");
+        // var hv = Input.GetAxis("Horizontal");
+        var hv = joystick.Horizontal;
         if (hv != 0)
         {
             rb.velocity = new Vector2(hv * speed, rb.velocity.y);
         }
 
         // Press the jump Key code
-        if (Input.GetButton("Jump"))
+        // if (Input.GetButton("Jump"))
+        if (vv > 0.3f)
         {
             if (isPlayerOnGround)
             {
@@ -121,7 +137,7 @@ public class Player : MonoBehaviour
             jumpAudio.Play();
         }
         
-        isPlayerOnGround = false;
+        // isPlayerOnGround = false;
         rb.velocity = new Vector2(rb.velocity.x, force);
         jumping = true;
         falling = false;

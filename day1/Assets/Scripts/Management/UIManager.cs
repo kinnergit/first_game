@@ -18,9 +18,13 @@ namespace Management
             if (instance == null)
             {
                 instance = this;
+                
+                DontDestroyOnLoad(instance);
             }
-        
-            DontDestroyOnLoad(instance);
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
         private void Start()

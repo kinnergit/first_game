@@ -18,9 +18,14 @@ namespace Management
             if (instance == null)
             {
                 instance = this;
+                
+                DontDestroyOnLoad(instance);
+            }
+            else
+            {
+                Destroy(gameObject);
             }
         
-            DontDestroyOnLoad(instance);
         }
 
         public static GameManager GetInstance()

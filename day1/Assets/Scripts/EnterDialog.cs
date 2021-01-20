@@ -1,22 +1,21 @@
+using Management;
 using UnityEngine;
 
 public class EnterDialog : MonoBehaviour
 {
-    public GameObject dialog;
-    
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other != null && other.gameObject.CompareTag("Player"))
         {
-            dialog.SetActive(true);
+            CanvasManager.GetInstance().dialog.SetActive(true);
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other != null && other.gameObject.CompareTag("Player"))
         {
-            dialog.SetActive(false);
+            CanvasManager.GetInstance().dialog.SetActive(false);
         }
     }
 }

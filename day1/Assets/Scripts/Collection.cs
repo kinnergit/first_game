@@ -46,7 +46,7 @@ public class Collection : MonoBehaviour
         {
             gm.IncrCherryNum();
         } else if (isGemCollected)
-        {
+        { 
             gm.IncrGemNum();
         }
     }
